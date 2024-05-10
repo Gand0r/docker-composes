@@ -1,0 +1,14 @@
+services:
+  graphite:
+    image: graphiteapp/graphite-statsd:latest
+    restart: unless-stopped
+    ports:
+    - 8080:8080
+    - 2003:2003
+    - 8125:8125
+    volumes:
+    - ./storage:/opt/graphite/storage
+    - ./storage-schemas.conf:/opt/graphite/conf/storage-schemas.conf
+    environment:
+    - GRAPHITE_DEBUG=1
+    - GOCARBON=1
