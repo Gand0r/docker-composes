@@ -3,40 +3,12 @@ services:
   app:
     image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
+    container_name: nginx-proxy
     ports:
-      # These ports are in format <host-port>:<container-port>
-      - '80:80' # Public HTTP Port
-      - '443:443' # Public HTTPS Port
-      - '81:81' # Admin Web Port
-      # Add any other Stream port you want to expose
-      # - '21:21' # FTP
-#kubernetes stream
-#      - '6443:6443'
-#      - '2379:2379'
-#      - '2380:2380'
-#      - '10250:10250'
-#      - '10257:10257'
-#      - '10259:10259'
-
-#stream VNC pvelab
+      - '80:80'
+      - '443:443'
+      - '81:81'
       - '5900:5900'
-
-#keycloak
-      - '8009:8009'
-      - '8080:8080'
-      - '8443:8443'
-      - '12201:12201'
-#all stream
-#       - '80-65535'
-    # Uncomment the next line if you uncomment anything in the section
-    # environment:
-      # Uncomment this if you want to change the location of
-      # the SQLite DB file within the container
-      # DB_SQLITE_FILE: "/data/database.sqlite"
-
-      # Uncomment this if IPv6 is not enabled on your host
-      # DISABLE_IPV6: 'true'
-
     volumes:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt

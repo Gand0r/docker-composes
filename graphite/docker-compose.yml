@@ -1,5 +1,6 @@
 services:
   graphite:
+    container_name: graphite
     image: graphiteapp/graphite-statsd:latest
     restart: unless-stopped
     ports:
