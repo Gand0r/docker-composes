@@ -1,11 +1,11 @@
 services:
-  app:
-  image: 'portainer/portainer-ee:latest'
-  restart: unless stopped
-  container_name: portainer
-  ports:
-  - '8000:8000'
-  - '9443:9443'
-  volumes:
-  - ./portainer_data:/data
-  - /var/run/docker.sock:/var/run/docker.sock
+  portainer:
+    image: 'portainer/portainer-ee:latest'
+    restart: unless-stopped
+    container_name: portainer
+    ports:
+    - '8000:8000'
+    - '9443:9443'
+    volumes:
+    - ./portainer_data:/data
+    - /var/run/docker.sock:/var/run/docker.sock
