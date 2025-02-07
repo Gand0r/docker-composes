@@ -70,7 +70,7 @@ services:
     image: bitnami/elasticsearch:${ELASTICSEARCH_VERSION:-8.17.0}
     restart: ${RESTART:-always}
     volumes:
-      - ./elasticsearch-data:/bitnami/elasticsearch/data
+      - elasticsearch-data:/bitnami/elasticsearch/data
 
   zammad-init:
     <<: *zammad-service
@@ -115,7 +115,6 @@ services:
     restart: ${RESTART:-always}
     volumes:
       - ./redis-data:/data
-
   zammad-scheduler:
     <<: *zammad-service
     command: ["zammad-scheduler"]
@@ -125,3 +124,7 @@ services:
     command: ["zammad-websocket"]
     ports:
       - "6042:6042"
+
+volumes:
+  elasticsearch-data:
+    driver: local
