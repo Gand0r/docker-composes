@@ -1,0 +1,11 @@
+services:
+  draw:
+    image: jgraph/drawio
+    container_name: draw
+    restart: unless-stopped
+    ports:
+     - '80:8080'
+    volumes:
+     - ./drawio_data:/var/www/html
+    environment:
+     - DRAWIO_ENV=production
