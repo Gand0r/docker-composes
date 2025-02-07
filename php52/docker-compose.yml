@@ -1,0 +1,12 @@
+services:
+  app:
+    image: 'tommylau/php-5.2'
+    restart: unless-stopped
+    container_name: apache22-php52
+    ports:
+      - '80:80'
+    volumes:
+      - /var/www/html:/var/www/html/
+      - apache2:/etc/apache2/
+      - ./php.ini:/etc/php/apache2-php5.2/php.ini
+      - /var/log/apache2:/var/log/apache2/
