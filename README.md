@@ -1,7 +1,8 @@
 I only use <strong>root</strong>
 <br>Use with your own risk
 <br>
-Some docker might use same port, make sure to check compose file<br>
+Some docker might use same port<br>
+make sure to check compose file<br>
 ====================================================================
 Install docker engine and docker compose plugin first <br>
 Simply use 1 line<br>
