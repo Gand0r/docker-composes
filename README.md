@@ -1,9 +1,15 @@
 I only use <strong>root</strong>
 <br>Use with your own risk
 <br>
+Some docker might use same port, make sure to check compose file
 ====================================================================
-Install docker engine and docker compose plugin first
+Install docker engine and docker compose plugin first <br>
+Simply use 1 line<br>
+<code>
+curl -sSL get.docker.com | sh
+</code>
 
+Or using package manager on your machine
 <br><br>
 <strong>Debian / Ubuntu</strong>
 # Add docker key:
