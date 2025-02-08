@@ -1,0 +1,16 @@
+services:
+  app:
+    image: powerdnsadmin/pda-legacy:latest
+    container_name: powerdns_admin
+    ports:
+      - "8080:80"
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+    environment:
+      - GUNICORN_TIMEOUT=60
+      - GUNICORN_WORKERS=2
+      - GUNICORN_LOGLEVEL=DEBUG
+      - SECRET_KEY='YOURSECRETKEY'
+EOF
