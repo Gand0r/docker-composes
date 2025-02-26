@@ -102,7 +102,7 @@ services:
     image: postgres:${POSTGRES_VERSION:-17.2-alpine}
     restart: ${RESTART:-always}
     volumes:
-      - ./postgresql-data:/var/lib/postgresql/data
+      - postgresql-data:/var/lib/postgresql/data
 
   zammad-railsserver:
     <<: *zammad-service
@@ -130,4 +130,6 @@ services:
 
 volumes:
   elasticsearch-data:
+    driver: local
+  postgresql-data:
     driver: local
