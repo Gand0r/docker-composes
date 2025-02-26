@@ -124,6 +124,9 @@ services:
     command: ["zammad-websocket"]
     ports:
       - "6042:6042"
+#set your own icon
+#    volumes:
+#      - ./custom-assets/myicons.svg:/opt/zammad/public/assets/images/icons.svg
 
 volumes:
   elasticsearch-data:
