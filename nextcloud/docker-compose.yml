@@ -1,0 +1,72 @@
+services:
+  nextcloud:
+    image: nextcloud:latest
+    container_name: nextcloud
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - mariadb
+      - redis
+    environment:
+      MYSQL_HOST: mariadb
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: nextcloud
+      MYSQL_PASSWORD: nextcloud
+      REDIS_HOST: redis
+      PHP_MEMORY_LIMIT: 1G
+      OPCACHE_MEMORY_CONSUMPTION: 512
+      OPCACHE_MAX_ACCELERATED_FILES: 10000
+      OPCACHE_VALIDATE_TIMESTAMPS: "1"
+    volumes:
+      - ./nextcloud_data:/var/www/html
+    networks:
+      - internal
+  cron:
+    image: nextcloud:latest
+    container_name: nextcloud-cron
+    restart: unless-stopped
+    depends_on:
+      - mariadb
+      - redis
+    entrypoint: /cron.sh
+    user: www-data
+    volumes:
+      - ./nextcloud_data:/var/www/html
+    networks:
+      - internal
+  mariadb:
+    image: mariadb:11.4.5
+    container_name: nextcloud-db
+    restart: unless-stopped
+    command: >
+      --transaction-isolation=READ-COMMITTED
+      --binlog-format=ROW
+      --innodb-file-per-table=1
+      --innodb-read-only-compressed=OFF
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: nextcloud
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: nextcloud
+      MYSQL_PASSWORD: nextcloud
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - internal
+  redis:
+    image: redis:alpine
+    container_name: nextcloud-redis
+    restart: unless-stopped
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redis_data:/data
+    networks:
+      - internal
+networks:
+  internal:
+    driver: bridge
+volumes:
+  db_data:
+  redis_data:
